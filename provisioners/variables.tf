@@ -17,7 +17,7 @@ variable "ec2_tags" {
 }
 
 variable "sg_name" {
-    default = "terra_allow-all"
+    default = "allow-all"
 }
 
 variable "sg_description" {
