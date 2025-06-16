@@ -1,8 +1,9 @@
 resource "aws_route53_record" "www" {
-  for_each = aws_instance.roboshop
+  count = 4
   zone_id = var.zone_id
-  name    = "${each.key}.${var.domain_name}" #mongodb.daws84s.site
+  name    = "${var.instances[count.index]}.${var.domain_name}" #mongodb.srikanth553.store
   type    = "A"
   ttl     = 1
-  records = [each.value.private_ip]
+  records = [aws_instance.roboshop[count.index].private_ip]
+  allow_overwrite = true
 }
