@@ -17,7 +17,7 @@ variable "ec2_tags" {
 }
 
 variable "sg_name" {
-    default = "allow-all"
+    default = "test2_allow-all"
 }
 
 variable "sg_description" {
@@ -40,6 +40,6 @@ variable "cidr_blocks" {
 
 variable "sg_tags" {
     default = {
-        Name = "allow-all"
+        Name = "test2_allow-all"
     }
 }
