@@ -1,18 +1,21 @@
 resource "aws_instance" "roboshop" {
-  count                  = 4
+  count                  = length(var.instances)
   ami                    = var.ami_id # left and right side names no need to be same
-  instance_type          = "t3.micro"
+  instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.allow_all.id]
 
   tags = merge(
     var.common_tags,
-  {
-    Name = "${var.instances[count.index]} 
-  }
-)
+    {
+      Name = "${var.project}-${var.instances[count.index]}-${var.environment}"
+      Component = var.instances[count.index]
+      Environment = var.environment
+    }
+  )
+}
 # ALLOW ALL SG
 resource "aws_security_group" "allow_all" {
-  name        = "${var.sg_name}-${var.environment}" #allow all
+  name        = "${var.project}-${var.sg_name}-${var.environment}" # allow-all-dev
   description = var.sg_description
 
   ingress {
@@ -33,8 +36,7 @@ resource "aws_security_group" "allow_all" {
   tags = merge(
     var.common_tags,
     {
-     Name = "${var_sg_name}-${var.environment}"
-      
+      Name = "${var.project}-${var.sg_name}-${var.environment}"
     }
-  
+  )
 }
