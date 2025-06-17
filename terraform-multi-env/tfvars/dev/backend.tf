@@ -1,5 +1,5 @@
-   
-bucket = "srikcloud-statefile-dev"
+
+bucket = "84sri-remote-state-dev"
 key    = "tfvars-demo"
 region = "us-east-1"
 encrypt        = true
