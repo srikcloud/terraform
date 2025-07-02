@@ -1,8 +1,8 @@
 resource "aws_route53_record" "www" {
-    count = 4
+  for_each = aws_instance.roboshop
   zone_id = var.zone_id
-  name    = "${var.instances[count.index]}.${var.domain_name}" #mongodb.srikanth553.store
+  name    = "${each.key}.${var.domain_name}" #mongodb.srikanth553.store
   type    = "A"
   ttl     = 1
-  records = [aws_instance.roboshop[count.index].private_ip]
+  records = [each.value.private_ip]
 }

@@ -40,7 +40,12 @@ variable "environment" {
 default = "dev"  
 }
 variable "instances" {
- default = ["mongodb", "redis", "mysql", "rabbitmq"] 
+ default = {
+    mongodb = "t3.small" # each keyword is assigned for every iteration, you will get each.key and each.vaue
+    redis = "t3.micro"
+    mysql = "t3.small"
+    rabbitmq = "t3.micro"
+ }
 }
 variable "zone_id" {
   default = "Z09795462K7LFC60CJ3VQ"
